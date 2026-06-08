@@ -12,8 +12,6 @@
   --blue: #476d86;
   --red: #7d1e20;
   --shadow: 0 35px 100px rgba(0, 0, 0, 0.55);
-  --mouse-x: 50%;
-  --mouse-y: 40%;
 }
 
 * {
@@ -31,7 +29,7 @@ body {
   font-family: Georgia, "Times New Roman", serif;
   overflow: hidden;
   background:
-    radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(201, 160, 92, 0.2), transparent 18rem),
+    radial-gradient(circle at 50% 35%, rgba(201, 160, 92, 0.16), transparent 20rem),
     linear-gradient(135deg, rgba(0, 0, 0, 0.22), rgba(0, 0, 0, 0.78)),
     repeating-linear-gradient(90deg, #24150d 0 18px, #1b0f09 18px 32px, #2c1a10 32px 46px);
 }
@@ -78,7 +76,6 @@ button {
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.26;
-  animation: drift 12s ease-in-out infinite alternate;
 }
 
 .orb-one {
@@ -106,7 +103,6 @@ button {
   color: rgba(239, 228, 199, 0.07);
   font-weight: 900;
   letter-spacing: 0;
-  animation: floatMark 8s ease-in-out infinite;
 }
 
 .mark-one {
@@ -213,7 +209,7 @@ button {
 
 .book-screen.active {
   display: block;
-  animation: screenArrive 640ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+  animation: screenArrive 360ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
 }
 
 .cover-screen {
@@ -228,11 +224,10 @@ button {
   transform-style: preserve-3d;
   cursor: pointer;
   filter: drop-shadow(0 55px 70px rgba(0, 0, 0, 0.58));
-  animation: bookIdle 5s ease-in-out infinite;
 }
 
 .book-cover.opening {
-  animation: bookOpen 1.3s cubic-bezier(0.18, 0.82, 0.22, 1) forwards;
+  animation: bookOpen 700ms cubic-bezier(0.18, 0.82, 0.22, 1) forwards;
 }
 
 .cover-front {
@@ -312,7 +307,6 @@ button {
   font-size: 4.2rem;
   background: rgba(0, 0, 0, 0.18);
   box-shadow: 0 0 45px rgba(201, 160, 92, 0.18);
-  animation: sealPulse 2.6s ease-in-out infinite;
 }
 
 .open-hint {
@@ -337,7 +331,6 @@ button {
   border-radius: 12px 22px 22px 12px;
   background: var(--paper);
   transform-origin: left center;
-  animation: pageFlick 2.8s ease-in-out infinite;
 }
 
 .cover-pages span:nth-child(2) {
@@ -461,7 +454,6 @@ button {
   object-fit: cover;
   filter: sepia(0.14) contrast(1.04) saturate(0.92);
   transform: scale(1.05);
-  animation: imageDrift 13s ease-in-out infinite alternate;
 }
 
 .book-image.tall img {
@@ -515,7 +507,8 @@ button {
   font-size: 0.76rem;
 }
 
-.chapter-link:hover {
+.chapter-link:hover,
+.chapter-link.active {
   transform: translateX(0.45rem) scale(1.015);
   background: rgba(201, 160, 92, 0.24);
   box-shadow: 0 12px 25px rgba(58, 36, 14, 0.18);
@@ -585,7 +578,6 @@ button {
   border-radius: 50%;
   background: var(--red);
   box-shadow: 0 0 0 0.45rem rgba(125, 30, 32, 0.12);
-  animation: pointPulse 2.2s ease-in-out infinite;
 }
 
 .timeline-book span {
@@ -624,25 +616,52 @@ button {
   text-transform: uppercase;
 }
 
-.page-turn:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
+.scroll-cue {
+  color: rgba(239, 228, 199, 0.7);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.page-exit-left {
-  animation: pageExitLeft 520ms ease both;
-}
-
+.page-exit-left,
 .page-exit-right {
-  animation: pageExitRight 520ms ease both;
+  animation: pageExit 260ms ease both;
 }
 
-.page-enter-left {
-  animation: pageEnterLeft 700ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
-}
-
+.page-enter-left,
 .page-enter-right {
-  animation: pageEnterRight 700ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+  animation: pageEnter 360ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+}
+
+.flip-sheet {
+  position: fixed;
+  top: 5.8rem;
+  bottom: 5.4rem;
+  left: 50%;
+  z-index: 24;
+  width: min(610px, calc(50vw - 1rem));
+  border-radius: 0 18px 18px 0;
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: left center;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.58), transparent 14rem),
+    linear-gradient(90deg, #d9c492, #f3e7c9 70%, #d8c08c);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+}
+
+.flip-sheet.flip-forward {
+  animation: scrollFlipForward 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+}
+
+.flip-sheet.flip-back {
+  left: auto;
+  right: 50%;
+  border-radius: 18px 0 0 18px;
+  transform-origin: right center;
+  animation: scrollFlipBack 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
 }
 
 @keyframes screenArrive {
@@ -702,66 +721,43 @@ button {
   }
 }
 
-@keyframes pageExitLeft {
+@keyframes pageExit {
   to {
     opacity: 0;
-    transform: rotateY(-28deg) translateX(-2.2rem) scale(0.96);
-    filter: blur(10px);
+    transform: translateY(-0.4rem) scale(0.985);
   }
 }
 
-@keyframes pageExitRight {
-  to {
-    opacity: 0;
-    transform: rotateY(28deg) translateX(2.2rem) scale(0.96);
-    filter: blur(10px);
-  }
-}
-
-@keyframes pageEnterLeft {
+@keyframes pageEnter {
   from {
     opacity: 0;
-    transform: rotateY(-28deg) translateX(-2.2rem) scale(0.96);
-    filter: blur(10px);
+    transform: translateY(0.4rem) scale(0.985);
   }
   to {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-@keyframes pageEnterRight {
-  from {
-    opacity: 0;
-    transform: rotateY(28deg) translateX(2.2rem) scale(0.96);
-    filter: blur(10px);
+@keyframes scrollFlipForward {
+  0% {
+    opacity: 0.92;
+    transform: rotateY(0deg);
   }
-  to {
-    opacity: 1;
-    transform: rotateY(0deg) translateX(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes imageDrift {
-  from {
-    transform: scale(1.05) translateX(-0.7rem);
-  }
-  to {
-    transform: scale(1.16) translateX(0.7rem);
-  }
-}
-
-@keyframes sealPulse {
-  0%,
   100% {
-    transform: scale(1);
-    box-shadow: 0 0 45px rgba(201, 160, 92, 0.18);
+    opacity: 0;
+    transform: rotateY(-112deg);
   }
-  50% {
-    transform: scale(1.06);
-    box-shadow: 0 0 70px rgba(201, 160, 92, 0.34);
+}
+
+@keyframes scrollFlipBack {
+  0% {
+    opacity: 0.92;
+    transform: rotateY(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: rotateY(112deg);
   }
 }
 
@@ -796,7 +792,7 @@ button {
 
 @media (max-width: 900px) {
   body {
-    overflow: auto;
+    overflow: hidden;
   }
 
   .book-stage {

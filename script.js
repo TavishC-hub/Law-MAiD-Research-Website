@@ -113,23 +113,32 @@ function handleScroll(deltaY) {
   }
 }
 
-function canScrollInsidePage(target, deltaY) {
-  const page = target.closest?.(".paper-page");
-  if (!page) return false;
+function getScrollablePage(target, deltaY) {
+  const active = screens[activeIndex];
+  const pointedPage = target.closest?.(".paper-page");
+  const candidatePages = pointedPage
+    ? [pointedPage]
+    : [...active.querySelectorAll(".paper-page")];
 
-  const canScroll = page.scrollHeight > page.clientHeight + 2;
-  if (!canScroll) return false;
+  return candidatePages.find((page) => {
+    const canScroll = page.scrollHeight > page.clientHeight + 2;
+    if (!canScroll) return false;
 
-  const atTop = page.scrollTop <= 0;
-  const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 2;
-  return (deltaY < 0 && !atTop) || (deltaY > 0 && !atBottom);
+    const atTop = page.scrollTop <= 0;
+    const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 2;
+    return (deltaY < 0 && !atTop) || (deltaY > 0 && !atBottom);
+  });
 }
 
 window.addEventListener(
   "wheel",
   (event) => {
-    if (canScrollInsidePage(event.target, event.deltaY)) return;
     event.preventDefault();
+    const scrollablePage = getScrollablePage(event.target, event.deltaY);
+    if (scrollablePage) {
+      scrollablePage.scrollBy({ top: event.deltaY, behavior: "auto" });
+      return;
+    }
     handleScroll(event.deltaY);
   },
   { passive: false }
@@ -148,8 +157,13 @@ window.addEventListener(
   (event) => {
     const currentY = event.touches[0]?.clientY || touchStartY;
     const deltaY = touchStartY - currentY;
-    if (canScrollInsidePage(event.target, deltaY)) return;
     event.preventDefault();
+    const scrollablePage = getScrollablePage(event.target, deltaY);
+    if (scrollablePage) {
+      scrollablePage.scrollBy({ top: deltaY, behavior: "auto" });
+      touchStartY = currentY;
+      return;
+    }
     handleScroll(deltaY);
     touchStartY = currentY;
   },

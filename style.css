@@ -616,15 +616,6 @@ button {
   text-transform: uppercase;
 }
 
-.scroll-cue {
-  color: rgba(239, 228, 199, 0.7);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .page-exit-left,
 .page-exit-right {
   animation: pageExit 260ms ease both;
@@ -635,33 +626,9 @@ button {
   animation: pageEnter 360ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
 }
 
-.flip-sheet {
-  position: fixed;
-  top: 5.8rem;
-  bottom: 5.4rem;
-  left: 50%;
-  z-index: 24;
-  width: min(610px, calc(50vw - 1rem));
-  border-radius: 0 18px 18px 0;
-  pointer-events: none;
-  opacity: 0;
-  transform-origin: left center;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.58), transparent 14rem),
-    linear-gradient(90deg, #d9c492, #f3e7c9 70%, #d8c08c);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
-}
-
-.flip-sheet.flip-forward {
-  animation: scrollFlipForward 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
-}
-
-.flip-sheet.flip-back {
-  left: auto;
-  right: 50%;
-  border-radius: 18px 0 0 18px;
-  transform-origin: right center;
-  animation: scrollFlipBack 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+.page-turn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 @keyframes screenArrive {
@@ -736,28 +703,6 @@ button {
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes scrollFlipForward {
-  0% {
-    opacity: 0.92;
-    transform: rotateY(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: rotateY(-112deg);
-  }
-}
-
-@keyframes scrollFlipBack {
-  0% {
-    opacity: 0.92;
-    transform: rotateY(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: rotateY(112deg);
   }
 }
 

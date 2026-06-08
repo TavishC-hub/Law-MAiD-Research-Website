@@ -36,7 +36,7 @@
           <h1>Canadian Law Book</h1>
           <p>Medical Assistance in Dying (MAID) in Canada</p>
           <div class="cover-seal">§</div>
-          <span class="open-hint">Scroll to open</span>
+          <span class="open-hint">Click to open</span>
         </div>
         <div class="cover-pages" aria-hidden="true">
           <span></span>
@@ -53,7 +53,7 @@
         <article class="paper-page intro-page">
           <p class="page-label">Table of Contents</p>
           <h2>Choose a chapter</h2>
-          <p>This law book is designed so each part of the research opens like a page. Scroll down to flip forward, scroll up to flip back, or use the chapter list to jump directly.</p>
+          <p>This law book is designed so each part of the research can be opened directly. Use the table of contents, the page buttons, or the keyboard arrows.</p>
           <figure class="book-image">
             <img src="assets/court-gallery.jpg" alt="Interior gallery of the Supreme Court of Canada building" />
             <figcaption>Supreme Court of Canada interior</figcaption>
@@ -260,11 +260,11 @@
     </section>
   </main>
 
-  <!-- Fixed status dock. The main interaction is scrolling to flip pages. -->
+  <!-- Fixed page controls for chapter-to-chapter movement. -->
   <footer class="page-dock">
-    <span class="scroll-cue">Scroll to flip</span>
+    <button class="page-turn prev-page" type="button">Previous</button>
     <span id="pageStatus">Cover</span>
-    <span class="scroll-cue">Use ↑ ↓ keys</span>
+    <button class="page-turn next-page" type="button">Next</button>
   </footer>
 
   <script src="script.js"></script>

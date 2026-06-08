@@ -1,9 +1,10 @@
-// Scroll-driven Canadian law book navigation.
+// Lightweight Canadian law book navigation.
 const screens = [...document.querySelectorAll(".book-screen")];
 const chapterList = document.querySelector("#chapterList");
 const pageStatus = document.querySelector("#pageStatus");
 const bookCover = document.querySelector("#bookCover");
-const bookStage = document.querySelector(".book-stage");
+const prevButton = document.querySelector(".prev-page");
+const nextButton = document.querySelector(".next-page");
 
 const chapters = screens.filter((screen) => screen.id !== "cover");
 const chapterLabels = {
@@ -22,15 +23,7 @@ const chapterLabels = {
 
 let activeIndex = 0;
 let isTurning = false;
-let wheelTotal = 0;
-let touchStartY = 0;
 
-// One lightweight sheet creates the visible page-flip effect on scroll.
-const flipSheet = document.createElement("div");
-flipSheet.className = "flip-sheet";
-document.body.appendChild(flipSheet);
-
-// Build the clickable contents page as a backup for direct access.
 chapters.forEach((chapter, index) => {
   const link = document.createElement("a");
   link.href = `#${chapter.id}`;
@@ -44,48 +37,40 @@ function getScreenIndex(id) {
   return screens.findIndex((screen) => screen.id === id);
 }
 
-function updateStatus() {
+function updateControls() {
   const active = screens[activeIndex];
   pageStatus.textContent = active?.dataset.pageTitle || "Cover";
+  prevButton.disabled = activeIndex === 0;
+  nextButton.disabled = activeIndex === screens.length - 1;
 
   document.querySelectorAll(".chapter-link").forEach((link) => {
     link.classList.toggle("active", link.getAttribute("href") === `#${active.id}`);
   });
 }
 
-function animateFlip(direction) {
-  flipSheet.classList.remove("flip-forward", "flip-back");
-  void flipSheet.offsetWidth;
-  flipSheet.classList.add(direction > 0 ? "flip-forward" : "flip-back");
-}
-
 function activateScreen(targetIndex, direction = 1) {
   if (isTurning || targetIndex === activeIndex || !screens[targetIndex]) return;
 
   isTurning = true;
-  animateFlip(direction);
-
   const current = screens[activeIndex];
   const next = screens[targetIndex];
-  current.classList.add(direction > 0 ? "page-exit-left" : "page-exit-right");
+  const leavingClass = direction > 0 ? "page-exit-left" : "page-exit-right";
+  const enteringClass = direction > 0 ? "page-enter-right" : "page-enter-left";
+
+  current.classList.add(leavingClass);
 
   window.setTimeout(() => {
-    current.classList.remove("active", "page-exit-left", "page-exit-right");
-    next.classList.add("active", direction > 0 ? "page-enter-right" : "page-enter-left");
+    current.classList.remove("active", leavingClass);
+    next.classList.add("active", enteringClass);
     activeIndex = targetIndex;
-    updateStatus();
+    updateControls();
     history.replaceState(null, "", `#${next.id}`);
 
     window.setTimeout(() => {
-      next.classList.remove("page-enter-left", "page-enter-right");
+      next.classList.remove(enteringClass);
       isTurning = false;
     }, 380);
   }, 220);
-}
-
-function turnBy(direction) {
-  const targetIndex = Math.max(0, Math.min(screens.length - 1, activeIndex + direction));
-  activateScreen(targetIndex, direction);
 }
 
 function openBook() {
@@ -96,79 +81,6 @@ function openBook() {
     bookCover.classList.remove("opening");
   }, 520);
 }
-
-function handleScroll(deltaY) {
-  if (isTurning) return;
-
-  wheelTotal += deltaY;
-  if (Math.abs(wheelTotal) < 80) return;
-
-  const direction = wheelTotal > 0 ? 1 : -1;
-  wheelTotal = 0;
-
-  if (activeIndex === 0 && direction > 0) {
-    openBook();
-  } else {
-    turnBy(direction);
-  }
-}
-
-function getScrollablePage(target, deltaY) {
-  const active = screens[activeIndex];
-  const pointedPage = target.closest?.(".paper-page");
-  const candidatePages = pointedPage
-    ? [pointedPage]
-    : [...active.querySelectorAll(".paper-page")];
-
-  return candidatePages.find((page) => {
-    const canScroll = page.scrollHeight > page.clientHeight + 2;
-    if (!canScroll) return false;
-
-    const atTop = page.scrollTop <= 0;
-    const atBottom = page.scrollTop + page.clientHeight >= page.scrollHeight - 2;
-    return (deltaY < 0 && !atTop) || (deltaY > 0 && !atBottom);
-  });
-}
-
-window.addEventListener(
-  "wheel",
-  (event) => {
-    event.preventDefault();
-    const scrollablePage = getScrollablePage(event.target, event.deltaY);
-    if (scrollablePage) {
-      scrollablePage.scrollBy({ top: event.deltaY, behavior: "auto" });
-      return;
-    }
-    handleScroll(event.deltaY);
-  },
-  { passive: false }
-);
-
-window.addEventListener(
-  "touchstart",
-  (event) => {
-    touchStartY = event.touches[0]?.clientY || 0;
-  },
-  { passive: true }
-);
-
-window.addEventListener(
-  "touchmove",
-  (event) => {
-    const currentY = event.touches[0]?.clientY || touchStartY;
-    const deltaY = touchStartY - currentY;
-    event.preventDefault();
-    const scrollablePage = getScrollablePage(event.target, deltaY);
-    if (scrollablePage) {
-      scrollablePage.scrollBy({ top: deltaY, behavior: "auto" });
-      touchStartY = currentY;
-      return;
-    }
-    handleScroll(deltaY);
-    touchStartY = currentY;
-  },
-  { passive: false }
-);
 
 bookCover.addEventListener("click", openBook);
 bookCover.addEventListener("keydown", (event) => {
@@ -194,19 +106,28 @@ document.addEventListener("click", (event) => {
   }
 });
 
-window.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowDown" || event.key === "ArrowRight" || event.key === "PageDown") {
-    event.preventDefault();
-    activeIndex === 0 ? openBook() : turnBy(1);
-  }
+prevButton.addEventListener("click", () => {
+  activateScreen(Math.max(0, activeIndex - 1), -1);
+});
 
-  if (event.key === "ArrowUp" || event.key === "ArrowLeft" || event.key === "PageUp") {
-    event.preventDefault();
-    turnBy(-1);
+nextButton.addEventListener("click", () => {
+  if (activeIndex === 0) {
+    openBook();
+  } else {
+    activateScreen(Math.min(screens.length - 1, activeIndex + 1), 1);
   }
 });
 
-// Start at a hash-linked chapter if someone shares a direct link.
+window.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowRight") {
+    nextButton.click();
+  }
+
+  if (event.key === "ArrowLeft") {
+    prevButton.click();
+  }
+});
+
 const initialHash = location.hash.replace("#", "");
 const initialIndex = initialHash ? getScreenIndex(initialHash) : 0;
 if (initialIndex > 0) {
@@ -215,5 +136,4 @@ if (initialIndex > 0) {
   screens[activeIndex].classList.add("active");
 }
 
-bookStage?.focus?.();
-updateStatus();
+updateControls();

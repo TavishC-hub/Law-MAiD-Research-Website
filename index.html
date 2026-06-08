@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAID in Canada | Legal Research Exhibit</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Animated background layers create a cinematic legal-exhibit atmosphere. -->
+  <div class="background-orbit" aria-hidden="true">
+    <span class="orb orb-one"></span>
+    <span class="orb orb-two"></span>
+    <span class="orb orb-three"></span>
+    <span class="document-sweep sweep-one"></span>
+    <span class="document-sweep sweep-two"></span>
+    <span class="legal-mark mark-one">§</span>
+    <span class="legal-mark mark-two">CANADA</span>
+    <span class="legal-mark mark-three">CHARTER</span>
+  </div>
+
+  <!-- Sticky progress rail helps viewers understand where they are in the exhibit. -->
+  <aside class="side-rail" aria-label="Section progress">
+    <div class="rail-line"><span id="progressFill"></span></div>
+    <nav class="side-nav" id="sideNav" aria-label="Page sections"></nav>
+  </aside>
+
+  <main>
+    <!-- Hero / Introduction -->
+    <section class="hero panel" id="intro" data-title="Intro">
+      <div class="hero-grid">
+        <div class="kicker reveal">Law Final Research</div>
+        <h1 class="hero-title">
+          <span>Medical</span>
+          <span>Assistance</span>
+          <span>in Dying</span>
+          <span>in Canada</span>
+        </h1>
+        <p class="hero-copy reveal delay-1">An interactive legal research exhibit about MAID, Charter rights, human rights concerns, legal safeguards, and the debate between dignity, autonomy, and protection of vulnerable people.</p>
+        <div class="hero-actions reveal delay-2">
+          <a href="#legal-issue" class="button primary">Begin Exhibit</a>
+          <a href="#sources" class="button secondary">View References</a>
+        </div>
+      </div>
+      <div class="hero-document reveal delay-3" aria-label="Research focus card">
+        <div class="doc-topline"></div>
+        <p class="doc-label">Central Question</p>
+        <blockquote>How should Canadian law balance a person’s right to die with dignity against the need to protect vulnerable people from abuse, discrimination, or systemic pressure?</blockquote>
+      </div>
+    </section>
+
+    <!-- What is the legal issue? -->
+    <section class="panel content-panel" id="legal-issue" data-title="Issue">
+      <div class="section-heading reveal">
+        <p class="eyebrow">01 / Legal Issue</p>
+        <h2>What is the legal issue?</h2>
+      </div>
+      <div class="split-layout">
+        <article class="feature-card reveal">
+          <p>Not allowing people to have access to MAID would violate their section 7 rights, specifically the right to be free from government-imposed restrictions that cause unnecessary physical or psychological suffering (Koller, 2026). It would violate their right to die and do so with dignity (Canadian Human Rights Commission, 2024).</p>
+        </article>
+        <div class="card-stack reveal delay-1">
+          <article class="issue-card">
+            <span>Concern</span>
+            <p>At the same time, they don’t want people to abuse it (Department of Justice Canada, 2021).</p>
+          </article>
+          <article class="issue-card">
+            <span>Expansion Debate</span>
+            <p>Some parties are recommending expanding it to “mature minors” and people with mental illnesses (Doelle, 2022; Government of Canada, n.d.).</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who is affected? -->
+    <section class="panel content-panel" id="affected" data-title="Affected">
+      <div class="section-heading reveal">
+        <p class="eyebrow">02 / People Affected</p>
+        <h2>Who is affected?</h2>
+      </div>
+      <div class="three-cards">
+        <article class="glass-card reveal"><h3>Terminally Ill People</h3><p>It’s about/for people who are terminally ill with a reasonably foreseeable death and people who are suffering from a “grievous and irremediable medical condition” (Government of Canada, n.d.).</p></article>
+        <article class="glass-card reveal delay-1"><h3>Vulnerable Groups</h3><p>People who are victims of systemic problems such as poverty, homelessness, etc (Canadian Human Rights Commission, 2024).</p></article>
+        <article class="glass-card reveal delay-2"><h3>Mental Illness Debate</h3><p>People who are suffering from mental illnesses (Dying With Dignity Canada, 2026).</p></article>
+      </div>
+    </section>
+
+    <!-- When did the issue occur? -->
+    <section class="panel content-panel" id="timeline" data-title="Timeline">
+      <div class="section-heading reveal">
+        <p class="eyebrow">03 / Legal History</p>
+        <h2>When did the issue occur?</h2>
+      </div>
+      <div class="timeline" aria-label="MAID legal history timeline">
+        <article class="timeline-item reveal"><span class="year">2016</span><div><h3>MAID Became Legal</h3><p>MAID became legal on June 17, 2016, and has been getting ongoing adjustments (Department of Justice Canada, 2021). In 2016, it was only allowed for people with a reasonably foreseeable death (Koller, 2026).</p></div></article>
+        <article class="timeline-item reveal"><span class="year">2021</span><div><h3>Track 2 Introduced</h3><p>However in 2021, a new track, “Track 2”, was introduced. This allowed people who were suffering with irreversible conditions, even if they didn’t have a foreseeable death, to access MAID (Department of Justice Canada, 2021).</p></div></article>
+        <article class="timeline-item reveal"><span class="year">Ongoing</span><div><h3>Mental Illness Exclusion</h3><p>However, individuals whose sole underlying condition is a mental illness are strictly excluded from the program (Government of Canada, n.d.).</p></div></article>
+      </div>
+    </section>
+
+    <!-- Where is this issue happening? -->
+    <section class="panel content-panel" id="where" data-title="Where">
+      <div class="section-heading reveal">
+        <p class="eyebrow">04 / Location</p>
+        <h2>Where is this issue happening?</h2>
+      </div>
+      <div class="location-grid reveal">
+        <article><strong>Canada</strong><p>This issue is centrally in Canada with ethical debates taking place (Doelle, 2022).</p></article>
+        <article><strong>United States</strong><p>It is allowed in 10 states in the US, but highly regulated (Doelle, 2022).</p></article>
+        <article><strong>Australia</strong><p>It is allowed in a few Australian states, but highly regulated (Doelle, 2022).</p></article>
+        <article><strong>Europe</strong><p>It is allowed in the Netherlands and Belgium, still heavily regulated (Doelle, 2022).</p></article>
+      </div>
+    </section>
+
+    <!-- Why is this issue happening? -->
+    <section class="panel content-panel" id="why" data-title="Why">
+      <div class="section-heading reveal">
+        <p class="eyebrow">05 / Cause</p>
+        <h2>Why is this issue happening?</h2>
+      </div>
+      <div class="quote-row">
+        <blockquote class="large-quote reveal">Because people started speaking up on how it violates their rights (Canadian Human Rights Commission, 2024).</blockquote>
+        <blockquote class="large-quote reveal delay-1">It was making people who were suffering, with no end in sight, to continue suffering (Dying With Dignity Canada, 2026).</blockquote>
+      </div>
+    </section>
+
+    <!-- Relevant legislation and human rights -->
+    <section class="panel content-panel" id="legislation" data-title="Legislation">
+      <div class="section-heading reveal">
+        <p class="eyebrow">06 / Legislation + Human Rights</p>
+        <h2>Relevant legislation and human rights</h2>
+      </div>
+      <div class="law-grid">
+        <article class="law-card reveal"><span>Bill C-14</span><p>Bill C‑14 (2016): This created the first legal framework for MAID. It only allowed competent adults whose natural death was “reasonably foreseeable” to have access to it (Koller, 2026).</p></article>
+        <article class="law-card reveal"><span>Bill C-7</span><p>Bill C‑7 (2021): After court challenges, this law created a two‑track system. Track 1 covers people whose death is reasonably foreseeable. Track 2 expanded it to people with a chronic, incurable, and intolerable illness or disability whose death is not reasonably foreseeable (Department of Justice Canada, 2021).</p></article>
+        <article class="law-card reveal"><span>Bill C-62</span><p>Bill C‑62 (2024): This legislation legislated a temporary exclusion. It delayed MAID eligibility for people whose only condition is a mental illness until March 17, 2027 (Government of Canada, n.d.).</p></article>
+        <article class="law-card reveal"><span>Section 7</span><p>Section 7 (Right to Life, Liberty, and Security of the Person): The Supreme Court of Canada used Section 7 in the landmark Carter v. Canada (2015) ruling to strike down the criminal ban on assisted dying. The court argued that forcing a person to endure intolerable suffering or resort to early, unsafe suicide violates their bodily autonomy and personal security (Koller, 2026).</p></article>
+        <article class="law-card reveal"><span>Section 15</span><p>Section 15 (Equality Rights): Section 15 states that every individual is equal under the law without discrimination based on mental or physical disability (Koller, 2026).</p></article>
+        <article class="law-card reveal"><span>Human Rights Concerns</span><p>Pro‑MAID advocates argue that denying someone assisted dying based solely on a psychiatric condition or disability is discriminatory under Section 15. On the other hand, disability rights advocates argue that expanding Track 2 MAID creates a systemic inequality, suggesting that lives lived with disabilities are inherently less valuable or less worthy of protection (Canadian Human Rights Commission, 2024; Inclusion Canada, 2025).</p></article>
+      </div>
+      <article class="wide-note reveal">
+        <p>The CHRC argues that when people with disabilities choose MAID because they lack access to basic housing, income support, or community care, the system fails to protect their fundamental right to live with dignity (Canadian Human Rights Commission, 2024). Because provinces administer healthcare, provincial codes prohibit discrimination based on disability when delivering medical and social services. Human rights legal advocates argue that systemic underfunding of social programs by provincial governments leaves vulnerable populations with an unfair “choice” between severe poverty and a medically assisted death (Canadian Human Rights Commission, 2024; Inclusion Canada, 2025).</p>
+      </article>
+    </section>
+
+    <!-- Legal significance -->
+    <section class="panel content-panel" id="significance" data-title="Significance">
+      <div class="section-heading reveal">
+        <p class="eyebrow">07 / Legal Significance</p>
+        <h2>Why is the legal issue so important?</h2>
+      </div>
+      <div class="split-layout reverse">
+        <article class="feature-card reveal"><p>It’s important because it highlights a blatant systemic problem in our society where people who are impoverished, have disabilities, or are homeless only have two options: continue living with their unfair circumstances, or die a painless death (Canadian Human Rights Commission, 2024; Inclusion Canada, 2025).</p></article>
+        <article class="feature-card muted reveal delay-1"><p>For the people who have been living in these conditions for possibly their whole lives, it seems like a good choice to end their suffering. The people who make the rules couldn’t truly understand the mental state of someone who’s been suffering and finally gets a painless way to stop it, because most of us have had it good since the day we were born, including me.</p></article>
+      </div>
+      <div class="callout reveal"><p>A conflict exists between federal and provincial laws. For example, Quebec legally permits “advance requests” for patients with degenerative conditions (like Alzheimer’s). However, these remain illegal under the federal Criminal Code. In response, provincial directives told prosecutors not to pursue criminal charges against doctors. Over time, criminal and healthcare legislation has to change its definition of a state’s duty to protect life versus its duty to respect personal autonomy. It forces a baseline rewriting of criminal liability, medical malpractice, and health regulations (Koller, 2026).</p></div>
+    </section>
+
+    <!-- Legal perspectives -->
+    <section class="panel content-panel" id="perspectives" data-title="Perspectives">
+      <div class="section-heading reveal">
+        <p class="eyebrow">08 / Legal Perspectives</p>
+        <h2>How do people in the justice community see this controversy?</h2>
+      </div>
+      <div class="perspective-grid">
+        <article class="perspective-card reveal"><h3>The Individual Autonomy Perspective</h3><p>Legal groups focus on constitutional rights, arguing that under Section 7 of the Charter, a capable adult has a complete right to bodily autonomy and medical self‑determination. Denying someone access to healthcare choices based solely on a psychiatric diagnosis or long‑term disability is viewed as discriminatory under Section 15 (Koller, 2026; Dying With Dignity Canada, 2026).</p></article>
+        <article class="perspective-card reveal delay-1"><h3>The Disability Rights and Equality Perspective</h3><p>Human rights scholars and disability groups strongly oppose expansions, viewing “Track 2” MAID as systemic discrimination that devalues marginalized lives. They argue that true free will cannot exist when the government fails to provide affordable housing, specialized care, or living income, leaving vulnerable people to choose death simply due to poverty (Canadian Human Rights Commission, 2024; Inclusion Canada, 2025).</p></article>
+      </div>
+    </section>
+
+    <!-- Change and continuity -->
+    <section class="panel content-panel" id="change" data-title="Change">
+      <div class="section-heading reveal">
+        <p class="eyebrow">09 / Change + Continuity</p>
+        <h2>What has changed and what has stayed the same?</h2>
+      </div>
+      <div class="comparison reveal">
+        <article><h3>Changed</h3><p>In 2021 it was changed to a two‑track system to include people with a chronic, incurable, and intolerable illness or disability whose death is not reasonably foreseeable (Department of Justice Canada, 2021).</p></article>
+        <article><h3>Stayed the Same</h3><p>It has stayed firm on only allowing people with physical disabilities and who are over 18 to have access to MAID (Government of Canada, n.d.).</p></article>
+      </div>
+    </section>
+
+    <!-- Interrelationships -->
+    <section class="panel content-panel" id="interrelationships" data-title="Relationships">
+      <div class="section-heading reveal">
+        <p class="eyebrow">10 / Interrelationships</p>
+        <h2>How do people, groups, and government affect the justice system?</h2>
+      </div>
+      <div class="relationship-web reveal">
+        <article><span>Patients</span><p>Terminally or chronically ill patients use the court system to challenge laws, which forces the federal government to change the Criminal Code to allow broader MAID access (Koller, 2026).</p></article>
+        <article><span>Advocacy Groups</span><p>Patient rights groups lobby and sue to expand autonomy, while disability and human rights organizations intervene to restrict access, warning that systemic poverty and underfunding coerce vulnerable people into choosing death (Canadian Human Rights Commission, 2024; Inclusion Canada, 2025).</p></article>
+        <article><span>Government</span><p>The federal government constantly makes reactive legislation to meet court deadlines, while provincial governments create regulatory rules, such as Quebec bypassing federal criminal bans to allow advance requests locally.</p></article>
+      </div>
+    </section>
+
+    <!-- My opinion -->
+    <section class="panel content-panel" id="opinion" data-title="Opinion">
+      <div class="section-heading reveal">
+        <p class="eyebrow">11 / Opinion</p>
+        <h2>My opinion</h2>
+      </div>
+      <article class="opinion-card reveal">
+        <p>It’s a delicate example because on one hand I don’t want anyone to suffer with no end in sight and to be able to die with dignity, but I don’t want people to just die because our society/government isn’t doing enough to protect vulnerable groups (Canadian Human Rights Commission, 2024).</p>
+        <p>I’m especially against allowing people who only have mental illnesses to have access to MAID, but then I also put myself in their shoes and think what if I’m suffering in my head, that’s the same or worse as physical suffering, and there’s no end in sight for my suffering. If I’m forced to live with that for the rest of my life, I would probably find other ways to escape, which could end up with more harmful ways of suicide.</p>
+        <p>So what I’m trying to say is if we want to expand we need to be able to differentiate between actual suffering and just trying to get out of bad circumstances (Government of Canada, n.d.; Canadian Human Rights Commission, 2024).</p>
+      </article>
+    </section>
+
+    <!-- Suggestions -->
+    <section class="panel content-panel" id="suggestions" data-title="Suggestions">
+      <div class="section-heading reveal">
+        <p class="eyebrow">12 / Suggestions</p>
+        <h2>Suggestions to address the issue</h2>
+      </div>
+      <div class="suggestion-grid">
+        <article class="suggestion-card reveal"><span>01</span><p>There needs to be strict safeguards made if expansion continues, especially if it includes mental illnesses and minors. We need to be able to differentiate between actual suffering and just trying to get out of bad circumstances, and even a kid whose hormones are changing and over-exaggerating what’s happening in their mind (Doelle, 2022).</p></article>
+        <article class="suggestion-card reveal delay-1"><span>02</span><p>Also, the government needs to make it so that these groups basically have no choice to die painlessly, unless they want to continue suffering in poverty, homelessness, etc. (Canadian Human Rights Commission, 2024).</p></article>
+      </div>
+    </section>
+
+    <!-- References -->
+    <section class="panel content-panel sources-panel" id="sources" data-title="References">
+      <div class="section-heading reveal">
+        <p class="eyebrow">13 / References</p>
+        <h2>References</h2>
+      </div>
+      <div class="sources-list reveal">
+        <p>Canadian Human Rights Commission. (2024, February 23). <em>Ending one’s life must be a true and informed choice.</em> <a href="https://www.chrc-ccdp.gc.ca/resources/newsroom/ending-ones-life-must-be-true-and-informed-choice">https://www.chrc-ccdp.gc.ca/resources/newsroom/ending-ones-life-must-be-true-and-informed-choice</a></p>
+        <p>Department of Justice Canada. (2020, March). <em>What we heard report: A public consultation on medical assistance in dying (MAID).</em> Government of Canada. <a href="https://www.justice.gc.ca/eng/cj-jp/ad-am/wwh-cqnae/p2.html#s2-6-3">https://www.justice.gc.ca/eng/cj-jp/ad-am/wwh-cqnae/p2.html#s2-6-3</a></p>
+        <p>Department of Justice Canada. (2021, March 17). <em>New medical assistance in dying legislation becomes law.</em> Government of Canada. <a href="https://www.canada.ca/en/department-justice/news/2021/03/new-medical-assistance-in-dying-legislation-becomes-law.html">https://www.canada.ca/en/department-justice/news/2021/03/new-medical-assistance-in-dying-legislation-becomes-law.html</a></p>
+        <p>Doelle, A. (2022, October 28). <em>Medical assistance in dying around the world.</em> Dying With Dignity Canada. <a href="https://www.dyingwithdignity.ca/blog/medical-assistance-in-dying-around-the-world/">https://www.dyingwithdignity.ca/blog/medical-assistance-in-dying-around-the-world/</a></p>
+        <p>Dying With Dignity Canada. (2026, April 20). <em>Submission to the Special Joint Committee on Medical Assistance in Dying re: MI-SUMC.</em> House of Commons. <a href="https://www.ourcommons.ca/Content/Committee/451/AMAD/Brief/BR14026084/br-external/DyingWithDignityCanada-e.pdf">https://www.ourcommons.ca/Content/Committee/451/AMAD/Brief/BR14026084/br-external/DyingWithDignityCanada-e.pdf</a></p>
+        <p>Health Canada. (2025, August 27). <em>Medical assistance in dying: Overview.</em> Government of Canada. <a href="https://www.canada.ca/en/health-canada/services/health-services-benefits/medical-assistance-dying.html">https://www.canada.ca/en/health-canada/services/health-services-benefits/medical-assistance-dying.html</a></p>
+        <p>Inclusion Canada. (2025, March 10). <em>A person dying everyday: Canadian disability advocates highlight Canada’s controversial MAiD program at United Nations review.</em> <a href="https://www.inclusioncanada.ca/post/a-person-dying-everyday-canadian-disability-advocates-highlight-canada-s-controversial-maid-program">https://www.inclusioncanada.ca/post/a-person-dying-everyday-canadian-disability-advocates-highlight-canada-s-controversial-maid-program</a></p>
+        <p>Koller, J. (2026, April 1). <em>Navigating MAiD: From crime to care.</em> Reynolds Mirth Richards &amp; Farmer LLP. <a href="https://rmrf.com/navigating-maid-from-crime-to-care/">https://rmrf.com/navigating-maid-from-crime-to-care/</a></p>
+        <p>MAiD in Canada. (n.d.). <em>MAID and mature minors, part 2.</em> Substack. <a href="https://maidincanada.substack.com/p/maid-and-mature-minors-part-2-the">https://maidincanada.substack.com/p/maid-and-mature-minors-part-2-the</a></p>
+        <p>Nicol, J., &amp; Tiedemann, M. (2020, March 27). <em>Library of Parliament legislative summary of Bill C-7: An Act to amend the Criminal Code (medical assistance in dying).</em> Government of Canada. <a href="https://www.justice.gc.ca/eng/trans/bm-mb/other-autre/c7/summary-resultats.html">https://www.justice.gc.ca/eng/trans/bm-mb/other-autre/c7/summary-resultats.html</a></p>
+        <p>Sudbury.com. (n.d.). <em>Opinion: Assisted death shouldn’t be the answer when social supports fail.</em> <a href="https://www.sudbury.com/columns/guest-columns/opinion-assisted-death-shouldnt-be-the-answer-when-social-supports-fail-12369327">https://www.sudbury.com/columns/guest-columns/opinion-assisted-death-shouldnt-be-the-answer-when-social-supports-fail-12369327</a></p>
+        <p>Vancouver Sun. (n.d.). <em>Opinion: Canada should stop the expansion of MAID for mental illness once and for all.</em> <a href="https://vancouversun.com/opinion/op-ed/opinion-canada-should-stop-the-expansion-of-maid-for-mental-illness-once-and-for-all">https://vancouversun.com/opinion/op-ed/opinion-canada-should-stop-the-expansion-of-maid-for-mental-illness-once-and-for-all</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

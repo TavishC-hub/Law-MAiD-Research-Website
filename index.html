@@ -25,6 +25,17 @@
     <nav class="side-nav" id="sideNav" aria-label="Page sections"></nav>
   </aside>
 
+  <!-- Clickable table of contents so the project works like pages, not one long scroll. -->
+  <header class="topbar">
+    <a class="brand-lockup" href="#intro" aria-label="Open introduction">
+      <span>MAID</span>
+      <small>Legal Research Exhibit</small>
+    </a>
+    <button class="toc-toggle" id="tocToggle" type="button" aria-expanded="false" aria-controls="tocPanel">Contents</button>
+  </header>
+
+  <nav class="toc-panel" id="tocPanel" aria-label="Table of contents"></nav>
+
   <main>
     <!-- Hero / Introduction -->
     <section class="hero panel" id="intro" data-title="Intro">
@@ -42,10 +53,17 @@
           <a href="#sources" class="button secondary">View References</a>
         </div>
       </div>
+      <figure class="hero-visual reveal delay-2">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_Court_of_Canada_Building_gallery_2025.jpg" alt="Interior gallery of the Supreme Court of Canada building" />
+        <figcaption>Supreme Court of Canada interior, used as a visual law-theme reference.</figcaption>
+      </figure>
       <div class="hero-document reveal delay-3" aria-label="Research focus card">
         <div class="doc-topline"></div>
         <p class="doc-label">Central Question</p>
         <blockquote>How should Canadian law balance a person’s right to die with dignity against the need to protect vulnerable people from abuse, discrimination, or systemic pressure?</blockquote>
+      </div>
+      <div class="page-controls reveal delay-3">
+        <button class="page-btn next-page" type="button">Next page</button>
       </div>
     </section>
 

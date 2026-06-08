@@ -4,11 +4,48 @@ const sideNav = document.querySelector("#sideNav");
 const progressFill = document.querySelector("#progressFill");
 const heroDocument = document.querySelector(".hero-document");
 const backgroundOrbit = document.querySelector(".background-orbit");
+const tocPanel = document.querySelector("#tocPanel");
+const tocToggle = document.querySelector("#tocToggle");
 const parallaxCards = [
   ...document.querySelectorAll(
     ".feature-card, .glass-card, .issue-card, .law-card, .perspective-card, .suggestion-card, .large-quote, .callout, .opinion-card"
   ),
 ];
+
+const pageImages = {
+  "legal-issue": {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_Court_in_Supreme_Court_of_Canada_2025.JPG",
+    alt: "Supreme Court of Canada courtroom",
+    credit: "Supreme Court of Canada courtroom, Wikimedia Commons.",
+  },
+  affected: {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Medical_stethoscope.jpg",
+    alt: "Medical stethoscope",
+    credit: "Medical stethoscope image, Wikimedia Commons.",
+  },
+  timeline: {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Supreme_Court_of_Canada_Building_lobby_2025.JPG",
+    alt: "Supreme Court of Canada lobby",
+    credit: "Supreme Court of Canada lobby, Wikimedia Commons.",
+  },
+  legislation: {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/US_Department_of_Justice_Scales_Of_Justice.svg",
+    alt: "Scales of justice symbol",
+    credit: "Scales of justice symbol, Wikimedia Commons.",
+  },
+  perspectives: {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Federal_courtroom_in_the_Supreme_Court_of_Canada.jpg",
+    alt: "Federal courtroom inside the Supreme Court of Canada",
+    credit: "Federal courtroom in the Supreme Court of Canada, Wikimedia Commons.",
+  },
+  opinion: {
+    src: "https://commons.wikimedia.org/wiki/Special:FilePath/Laennec_stethoscope_from_Sharp%2C_1832_Wellcome_M0018706EB.jpg",
+    alt: "Historic stethoscope illustration",
+    credit: "Historic stethoscope image, Wellcome Collection via Wikimedia Commons.",
+  },
+};
+
+const pageTitles = sections.map((section) => section.dataset.title);
 
 // Add small glowing particles in the background for a dramatic exhibit feel.
 if (backgroundOrbit) {
@@ -33,6 +70,106 @@ sections.forEach((section) => {
 });
 
 const navLinks = [...document.querySelectorAll(".side-nav a")];
+
+// Insert image panels into selected pages without changing the research wording.
+Object.entries(pageImages).forEach(([id, image]) => {
+  const section = document.querySelector(`#${id}`);
+  const heading = section?.querySelector(".section-heading");
+  if (!section || !heading) return;
+
+  const figure = document.createElement("figure");
+  figure.className = "page-visual reveal";
+  figure.innerHTML = `
+    <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+    <figcaption>${image.credit}</figcaption>
+  `;
+  heading.insertAdjacentElement("afterend", figure);
+});
+
+parallaxCards.push(...document.querySelectorAll(".hero-visual, .page-visual"));
+
+// Build the larger table of contents panel.
+sections.forEach((section, index) => {
+  const link = document.createElement("a");
+  link.href = `#${section.id}`;
+  link.textContent = section.querySelector("h2")?.textContent || section.dataset.title;
+  link.dataset.number = String(index + 1).padStart(2, "0");
+  tocPanel.appendChild(link);
+});
+
+const tocLinks = [...tocPanel.querySelectorAll("a")];
+
+// Add back/next buttons to every non-hero page.
+sections.forEach((section, index) => {
+  if (section.querySelector(".page-controls")) return;
+  const controls = document.createElement("div");
+  controls.className = "page-controls reveal";
+  controls.innerHTML = `
+    <button class="page-btn prev-page" type="button">Previous page</button>
+    <button class="page-btn next-page" type="button">Next page</button>
+  `;
+  section.appendChild(controls);
+});
+
+function showPage(id) {
+  const fallbackId = sections[0].id;
+  const target = sections.find((section) => section.id === id) || sections[0];
+  const targetIndex = sections.indexOf(target);
+
+  sections.forEach((section, index) => {
+    const isActive = section === target;
+    section.classList.toggle("active-page", isActive);
+    section.classList.toggle("section-visible", isActive);
+
+    const prev = section.querySelector(".prev-page");
+    const next = section.querySelector(".next-page");
+    if (prev) prev.disabled = index === 0;
+    if (next) next.disabled = index === sections.length - 1;
+  });
+
+  [...navLinks, ...tocLinks].forEach((link) => {
+    const linkTarget = link.getAttribute("href") === `#${target.id}`;
+    link.classList.toggle("active", linkTarget);
+  });
+
+  document.title = `${pageTitles[targetIndex] || "MAID"} | MAID Legal Research`;
+  if (location.hash !== `#${target.id}`) {
+    history.replaceState(null, "", `#${target.id || fallbackId}`);
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.body.classList.add("page-mode");
+showPage(location.hash.replace("#", "") || "intro");
+
+tocToggle?.addEventListener("click", () => {
+  const isOpen = tocPanel.classList.toggle("open");
+  tocToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+tocPanel?.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
+  event.preventDefault();
+  showPage(link.getAttribute("href").replace("#", ""));
+  tocPanel.classList.remove("open");
+  tocToggle?.setAttribute("aria-expanded", "false");
+});
+
+document.addEventListener("click", (event) => {
+  const next = event.target.closest(".next-page");
+  const prev = event.target.closest(".prev-page");
+  if (!next && !prev) return;
+
+  const current = sections.findIndex((section) => section.classList.contains("active-page"));
+  const direction = next ? 1 : -1;
+  const target = sections[Math.max(0, Math.min(sections.length - 1, current + direction))];
+  if (target) showPage(target.id);
+});
+
+window.addEventListener("hashchange", () => {
+  showPage(location.hash.replace("#", "") || "intro");
+});
 
 // Reveal cards and headings as they enter the viewport.
 const revealObserver = new IntersectionObserver(
